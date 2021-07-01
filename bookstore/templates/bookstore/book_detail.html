@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p><strong><a href="{% url 'bookstore:book' %}">Move back</a></strong></p>
+
+{% if book_instance %}
+    <table>
+    <tr>
+        <th>Name</th>
+        <th>Pages</th>
+        <th>Price</th>
+        <th>Rating</th>
+        <th>Publication Date</th>
+        <th>Publisher</th>
+        <th>Authors</th>
+    </tr>
+    <tr>
+        <th>{{ book_instance.name }}</th>
+        <th>{{ book_instance.pages }}</th>
+        <th>{{ book_instance.price }}</th>
+        <th>{{ book_instance.rating }}</th>
+        <th>{{ book_instance.pubdate }}</th>
+        <th>{{ book_instance.publisher.name }}</th>
+        <th>{{ book_authors }}</th>
+    </tr>
+    </table>
+{% else %}
+    <p>No items available</p>
+{% endif %}
+
+</body>
+</html>

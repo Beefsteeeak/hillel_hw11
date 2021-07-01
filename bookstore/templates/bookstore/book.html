@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p><strong><a href="{% url 'bookstore:index' %}">Move back</a></strong></p>
+
+{% if book_list %}
+    <table>
+    <tr>
+        <th>Name</th>
+        <th>Rating</th>
+        <th>Publisher</th>
+        <th>Authors</th>
+    </tr>
+    {% for book in book_list %}
+        <tr>
+            <th><a href="{% url 'bookstore:book-detail' pk=book.pk %}">{{ book.name }}</a></th>
+            <th>{{ book.rating }}</th>
+            <th>{{ book.publisher.name }}</th>
+            <th>{{ book.authors.all }}</th>
+        </tr>
+    {% endfor %}
+    </table>
+{% else %}
+    <p>No items available</p>
+{% endif %}
+
+</body>
+</html>

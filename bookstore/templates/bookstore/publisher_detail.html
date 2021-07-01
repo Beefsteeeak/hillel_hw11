@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p><strong><a href="{% url 'bookstore:publisher' %}">Move back</a></strong></p>
+
+{% if publisher_instance %}
+    <table>
+    <tr>
+        <th>Name</th>
+        <th>Average rating</th>
+        <th>Books</th>
+    </tr>
+    <tr>
+        <th>{{ publisher_instance.name }}</th>
+        <th>{{ publisher_instance.avg_rating }}</th>
+        <th>{{ publisher_books }}</th>
+    </tr>
+    </table>
+{% else %}
+    <p>No items available</p>
+{% endif %}
+
+</body>
+</html>

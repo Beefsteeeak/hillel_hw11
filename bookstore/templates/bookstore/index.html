@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p><strong>We have:</strong></p>
+<table>
+    <tr>
+        <th><a href="{% url 'bookstore:author' %}">Authors</a></th>
+        <th><a href="{% url 'bookstore:publisher' %}">Publishers</a></th>
+        <th><a href="{% url 'bookstore:book' %}">Books</a></th>
+        <th><a href="{% url 'bookstore:store' %}">Stores</a></th>
+    </tr>
+    <tr>
+        <td>{{ num_authors }}</td>
+        <td>{{ num_publishers }}</td>
+        <td>{{ num_books }}</td>
+        <td>{{ num_stores }}</td>
+    </tr>
+</table>
+
+</body>
+</html>

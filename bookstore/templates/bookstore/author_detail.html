@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p><strong><a href="{% url 'bookstore:author' %}">Move back</a></strong></p>
+
+{% if author_instance %}
+    <table>
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Books</th>
+    </tr>
+    <tr>
+        <th>{{ author_instance.name }}</th>
+        <th>{{ author_instance.age }}</th>
+        <th>{{ author_books }}</th>
+    </tr>
+    </table>
+{% else %}
+    <p>No items available</p>
+{% endif %}
+
+</body>
+</html>
