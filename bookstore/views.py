@@ -34,7 +34,7 @@ def author(request):
 
 
 def author_detail(request, pk):
-    author_instance = Author.objects.get(pk=pk)
+    author_instance = Author.objects.prefetch_related('book_set').get(pk=pk)
     author_books = list(author_instance.book_set.all())
     return render(
         request,
@@ -58,8 +58,7 @@ def publisher(request):
 
 
 def publisher_detail(request, pk):
-    publisher_list = Publisher.objects.annotate(avg_rating=Avg('book__rating'))
-    publisher_instance = publisher_list.get(pk=pk)
+    publisher_instance = Publisher.objects.annotate(avg_rating=Avg('book__rating')).get(pk=pk)
     publisher_books = list(publisher_instance.book_set.all())
     return render(
         request,
@@ -72,8 +71,7 @@ def publisher_detail(request, pk):
 
 
 def book(request):
-    book_list1 = Book.objects.select_related("publisher").all()
-    book_list = book_list1.prefetch_related('authors')
+    book_list = Book.objects.select_related("publisher").prefetch_related('authors').all()
     return render(
         request,
         'bookstore/book.html',
@@ -84,9 +82,7 @@ def book(request):
 
 
 def book_detail(request, pk):
-    book_list1 = Book.objects.select_related("publisher").all()
-    book_list = book_list1.prefetch_related('authors')
-    book_instance = book_list.get(pk=pk)
+    book_instance = Book.objects.select_related("publisher").prefetch_related('authors').get(pk=pk)
     book_authors = list(book_instance.authors.all())
     return render(
         request,
@@ -110,8 +106,7 @@ def store(request):
 
 
 def store_detail(request, pk):
-    store_list = Store.objects.annotate(avg_rating=Avg('books__rating'), avg_price=Avg('books__price'))
-    store_instance = store_list.get(pk=pk)
+    store_instance = Store.objects.annotate(avg_rating=Avg('books__rating'), avg_price=Avg('books__price')).get(pk=pk)
     store_books = list(store_instance.books.all())
     return render(
         request,

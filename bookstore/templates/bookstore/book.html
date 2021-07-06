@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'bookstore/base.html' %}
 
+{% block content %}
 <p><strong><a href="{% url 'bookstore:index' %}">Move back</a></strong></p>
 
 {% if book_list %}
@@ -28,6 +23,4 @@
 {% else %}
     <p>No items available</p>
 {% endif %}
-
-</body>
-</html>
+{% endblock %}

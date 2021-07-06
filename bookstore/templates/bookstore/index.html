@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'bookstore/base.html' %}
 
+{% block content %}
 <p><strong>We have:</strong></p>
 <table>
     <tr>
@@ -21,6 +16,4 @@
         <td>{{ num_stores }}</td>
     </tr>
 </table>
-
-</body>
-</html>
+{% endblock %}
