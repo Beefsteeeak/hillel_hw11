@@ -9,3 +9,6 @@ Database population:
 
 To run celery worker run:
 celery -A hillel_hw11 worker -l INFO
+
+To run celery worker + celery beat run:
+celery -A hillel_hw11 worker -B -l INFO
