@@ -22,7 +22,7 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'parse-quote': {
         "task": "quoteparser.tasks.parse_quote",
-        "schedule": crontab(minute='1-59/2'),
+        "schedule": crontab(),
         # "schedule": crontab(hour='1-59/2'),
     },
 }

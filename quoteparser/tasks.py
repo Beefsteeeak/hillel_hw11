@@ -46,11 +46,19 @@ def parse_quote():
                     break
                 if div == soup.find('div', {'class': 'col-md-8'}).find_all('div', {'class': 'quote'})[-1]:
                     if soup.find('div', {'class': 'col-md-8'}).find('nav').find('ul').find('li', {'class': 'next'}):
-                        site = site + soup.find('div', {'class': 'col-md-8'}).nav.ul.find('li', {'class': 'next'})\
-                            .a.get('href')
+                        site = site + soup.find('div', {'class': 'col-md-8'}).find('nav').find('ul')\
+                            .find('li', {'class': 'next'}).a.get('href')
+                        r = requests.get(site)
+                        if r.status_code != requests.codes.ok:
+                            print(f"{site} status - {r.status_code}")  # noqa:T001
+                        else:
+                            print(f"{site} status - {r.status_code}")  # noqa:T001
+
+                            soup = BeautifulSoup(r.text, 'html.parser')
                     else:
                         send_mail('quotes', 'No more quotes to parse', 'noreply@test.com', ['admin@mail.com'])
                         indicator = 1
                         break
             if counter == 5 or indicator == 1:
+                print('Done')  # noqa:T001
                 break
