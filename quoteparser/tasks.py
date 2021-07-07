@@ -26,6 +26,7 @@ def parse_quote():
         print(f"{site} status - {r.status_code}")  # noqa:T001
 
         counter = 0
+        indicator = 0
         soup = BeautifulSoup(r.text, 'html.parser')
 
         while True:
@@ -49,6 +50,7 @@ def parse_quote():
                             .a.get('href')
                     else:
                         send_mail('quotes', 'No more quotes to parse', 'noreply@test.com', ['admin@mail.com'])
+                        indicator = 1
                         break
-            if counter == 5 or send_mail('quotes', 'No more quotes to parse', 'noreply@test.com', ['admin@mail.com']):
+            if counter == 5 or indicator == 1:
                 break
