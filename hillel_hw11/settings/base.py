@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django_celery_results',
 
     'bookstore.apps.BookstoreConfig',
+    'quoteparser.apps.QuoteparserConfig',
     'reminder.apps.ReminderConfig',
 ]
 
