@@ -11,8 +11,8 @@ from .models import Author, Quote
 
 def get_info(obj):
     quote_desc = obj.find('span', {'class': 'text'}).string
-    author_fullname = obj.span.small.string
-    url_author_desc = obj.span.a.get('href')
+    author_fullname = obj.find('span').find('small', {'class': 'author'}).string
+    url_author_desc = obj.find('span').find('a').get('href')
     return quote_desc, author_fullname, url_author_desc
 
 
@@ -30,8 +30,13 @@ def parse_quote():
         soup = BeautifulSoup(r.text, 'html.parser')
 
         while True:
-            for div in soup.find('div', {'class': 'col-md-8'}).find_all('div', {'class': 'quote'}):
-                quote_desc, author_fullname, url_author_desc = get_info(div)
+            for div in soup.find('div', {'class': 'row'}).find('div', {'class': 'col-md-8'})\
+                    .find_all('div', {'class': 'quote'}):
+                # quote_desc, author_fullname, url_author_desc = get_info(div)
+                quote_desc = div.find('span', {'class': 'text'}).string
+                author_fullname = div.find('span').find('small', {'class': 'author'}).string
+                url_author_desc = div.find('span').find('a').get('href')
+
                 author, created_auth = Author.objects.get_or_create(
                     fullname=author_fullname,
                     description='!!!!'
@@ -44,10 +49,12 @@ def parse_quote():
                     counter += 1
                 if counter == 5:
                     break
-                if div == soup.find('div', {'class': 'col-md-8'}).find_all('div', {'class': 'quote'})[-1]:
-                    if soup.find('div', {'class': 'col-md-8'}).find('nav').find('ul').find('li', {'class': 'next'}):
-                        site = site + soup.find('div', {'class': 'col-md-8'}).find('nav').find('ul')\
-                            .find('li', {'class': 'next'}).a.get('href')
+                if div == soup.find('div', {'class': 'row'}).find('div', {'class': 'col-md-8'})\
+                    .find_all('div', {'class': 'quote'})[-1]:
+                    if soup.find('div', {'class': 'row'}).find('div', {'class': 'col-md-8'}).find('nav').find('ul')\
+                            .find('li', {'class': 'next'}):
+                        site = site + soup.find('div', {'class': 'row'}).find('div', {'class': 'col-md-8'})\
+                            .find('nav').find('ul').find('li', {'class': 'next'}).a.get('href')
                         r = requests.get(site)
                         if r.status_code != requests.codes.ok:
                             print(f"{site} status - {r.status_code}")  # noqa:T001
