@@ -35,7 +35,7 @@ def parse_quote():
                 # quote_desc, author_fullname, url_author_desc = get_info(div)
                 quote_desc = div.find('span', {'class': 'text'}).string
                 author_fullname = div.find('span').find('small', {'class': 'author'}).string
-                url_author_desc = div.find('span').find('a').get('href')
+                url_author_desc = div.find('span').find('a').get('href')  # noqa:F841
 
                 author, created_auth = Author.objects.get_or_create(
                     fullname=author_fullname,
@@ -50,7 +50,7 @@ def parse_quote():
                 if counter == 5:
                     break
                 if div == soup.find('div', {'class': 'row'}).find('div', {'class': 'col-md-8'})\
-                    .find_all('div', {'class': 'quote'})[-1]:
+                        .find_all('div', {'class': 'quote'})[-1]:
                     if soup.find('div', {'class': 'row'}).find('div', {'class': 'col-md-8'}).find('nav').find('ul')\
                             .find('li', {'class': 'next'}):
                         site = site + soup.find('div', {'class': 'row'}).find('div', {'class': 'col-md-8'})\
