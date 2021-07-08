@@ -40,6 +40,7 @@ def parse_quote():
                 r = requests.get(site_author)
                 if r.status_code != requests.codes.ok:
                     print(f"{site_author} status - {r.status_code}")  # noqa:T001
+                    continue
                 else:
                     print(f"{site_author} status - {r.status_code}")  # noqa:T001
 
@@ -74,6 +75,7 @@ def parse_quote():
                         r = requests.get(site_pages)
                         if r.status_code != requests.codes.ok:
                             print(f"{site_pages} status - {r.status_code}")  # noqa:T001
+                            continue
                         else:
                             print(f"{site_pages} status - {r.status_code}")  # noqa:T001
 
