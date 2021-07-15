@@ -1,10 +1,10 @@
 import random
 
-from rediscache.models import Author, Book
-
 from django.core.management.base import BaseCommand
 
 from faker import Faker
+
+from rediscache.models import Author, Book
 
 fake = Faker()
 
