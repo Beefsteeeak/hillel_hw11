@@ -35,7 +35,7 @@ class Command(BaseCommand):
             for i in range(20):
                 counter = counter + 1
                 books.append(Book(name=f"Book{counter}", pages=random.randint(150, 800), price=random.randint(50, 300),
-                                  rating=random.uniform(0, 10), publisher=publisher, pubdate=fake.date()))
+                                  rating=round(random.uniform(0, 10), 2), publisher=publisher, pubdate=fake.date()))
         Book.objects.bulk_create(books)
 
         #  create MTM relations from Book to Author

@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
     'bookstore.apps.BookstoreConfig',
     'quoteparser.apps.QuoteparserConfig',
+    'rediscache.apps.RediscacheConfig',
     'reminder.apps.ReminderConfig',
 ]
 
@@ -145,3 +146,14 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# cache
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
