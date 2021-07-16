@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('bookstore/', include('bookstore.urls')),
     path('reminder/', include('reminder.urls')),
+    path('rediscache/', include('rediscache.urls')),
 ]
 
 if settings.DEBUG:

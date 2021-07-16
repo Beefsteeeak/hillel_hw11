@@ -1,0 +1,24 @@
+{% extends 'rediscache/base.html' %}
+
+{% block title %}Author detail{% endblock %}
+
+{% block content %}
+<p><strong><a href="{% url 'rediscache:author' %}">Move back</a></strong></p>
+
+
+    <table>
+    <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Average rating</th>
+        <th>Books</th>
+    </tr>
+    <tr>
+        <th>{{ object.name }}</th>
+        <th>{{ object.age }}</th>
+        <th>{{ object.avg_rating }}</th>
+        <th>{{ object.book_set.all }}</th>
+    </tr>
+    </table>
+
+{% endblock %}

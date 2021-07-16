@@ -1,0 +1,17 @@
+{% extends 'rediscache/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<p><strong>We have:</strong></p>
+<table>
+    <tr>
+        <th><a href="{% url 'rediscache:author' %}">Authors</a></th>
+        <th><a href="{% url 'rediscache:book' %}">Books</a></th>
+    </tr>
+    <tr>
+        <td>{{ num_authors }}</td>
+        <td>{{ num_books }}</td>
+    </tr>
+</table>
+{% endblock %}
