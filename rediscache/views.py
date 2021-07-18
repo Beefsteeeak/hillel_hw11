@@ -1,10 +1,10 @@
-from django.contrib.auth.mixins import LoginRequiredMixin  # noqa:F401
-from django.contrib.messages.views import SuccessMessageMixin  # noqa:F401
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models import Avg, Count
 from django.shortcuts import render
-from django.urls import reverse_lazy  # noqa:F401
+from django.urls import reverse_lazy
 from django.views.generic.detail import DetailView
-from django.views.generic.edit import CreateView, DeleteView, UpdateView  # noqa:F401
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
 from .models import Author, Book
@@ -52,3 +52,51 @@ class BookDetailView(DetailView):
 
     def get_queryset(self):
         return Book.objects.prefetch_related('authors').annotate(avg_age=Avg('authors__age'))
+
+
+class AuthorCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Author
+    fields = ['name', 'age']
+    template_name_suffix = '_create_form'
+    success_url = reverse_lazy('rediscache:author')
+    login_url = '/admin/'
+    success_message = 'Author was created successfully'
+
+
+class AuthorUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Author
+    fields = ['name', 'age']
+    template_name_suffix = '_update_form'
+    success_url = reverse_lazy('rediscache:author')
+    login_url = '/admin/'
+    success_message = 'Author was updated successfully'
+
+
+class AuthorDeleteView(LoginRequiredMixin, DeleteView):
+    model = Author
+    success_url = reverse_lazy('rediscache:author')
+    login_url = '/admin/'
+
+
+class BookCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Book
+    fields = ['name', 'pages', 'price', 'rating', 'pubdate', 'authors']
+    template_name_suffix = '_create_form'
+    success_url = reverse_lazy('rediscache:book')
+    login_url = '/admin/'
+    success_message = 'Book was created successfully'
+
+
+class BookUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Book
+    fields = ['name', 'pages', 'price', 'rating', 'pubdate', 'authors']
+    template_name_suffix = '_update_form'
+    success_url = reverse_lazy('rediscache:book')
+    login_url = '/admin/'
+    success_message = 'Book was updated successfully'
+
+
+class BookDeleteView(LoginRequiredMixin, DeleteView):
+    model = Book
+    success_url = reverse_lazy('rediscache:book')
+    login_url = '/admin/'

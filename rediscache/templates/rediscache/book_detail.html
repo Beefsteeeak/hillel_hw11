@@ -3,27 +3,41 @@
 {% block title %}Book detail{% endblock %}
 
 {% block content %}
-<p><strong><a href="{% url 'rediscache:book' %}">Move back</a></strong></p>
 
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Pages</th>
-        <th>Price</th>
-        <th>Rating</th>
-        <th>Publication Date</th>
-        <th>Average age of authors</th>
-        <th>Authors</th>
-    </tr>
-    <tr>
-        <th>{{ object.name }}</th>
-        <th>{{ object.pages }}</th>
-        <th>{{ object.price }}</th>
-        <th>{{ object.rating }}</th>
-        <th>{{ object.pubdate }}</th>
-        <th>{{ object.avg_age }}</th>
-        <th>{{ object.authors.all }}</th>
-    </tr>
-</table>
+    <p><strong><a href="{% url 'rediscache:book' %}">To list of books</a></strong></p>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Pages</th>
+            <th>Price</th>
+            <th>Rating</th>
+            <th>Publication Date</th>
+            <th>Average age of authors</th>
+            <th>Authors</th>
+        </tr>
+        <tr>
+            <th>{{ object.name }}</th>
+            <th>{{ object.pages }}</th>
+            <th>{{ object.price }}</th>
+            <th>{{ object.rating }}</th>
+            <th>{{ object.pubdate }}</th>
+            <th>{{ object.avg_age }}</th>
+            <th>{{ object.authors.all }}</th>
+        </tr>
+    </table>
+
+    <p></p>
+
+    <div class="book actions">
+        <form action="{% url 'rediscache:book-update' pk=object.pk %}" style="display: inline-block">
+            {% csrf_token %}
+            <input type="submit" value="Update">
+        </form>
+        <form action="{% url 'rediscache:book-delete' pk=object.pk %}" style="display: inline-block">
+            {% csrf_token %}
+            <input type="submit" value="Delete">
+        </form>
+    </div>
 
 {% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'rediscache/base.html' %}
+
+{% block title %}Confirm delete{% endblock %}
+
+{% block content %}
+
+    <p><strong><a href="{% url 'rediscache:author-detail' pk=object.pk %}">To author detail</a></strong></p>
+
+    <form method="post">
+        {% csrf_token %}
+        <p>Are you sure you want to delete "{{ object }}"?</p>
+        <input type="submit" value="Delete">
+    </form>
+
+{% endblock %}

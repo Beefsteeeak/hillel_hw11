@@ -1,0 +1,15 @@
+{% extends 'rediscache/base.html' %}
+
+{% block title %}Update book{% endblock %}
+
+{% block content %}
+
+    <p><strong><a href="{% url 'rediscache:book-detail' pk=object.pk %}">To book detail</a></strong></p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Update">
+    </form>
+
+{% endblock %}

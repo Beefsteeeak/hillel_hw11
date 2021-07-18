@@ -4,7 +4,15 @@
 
 {% block content %}
 
-    <p><strong><a href="{% url 'rediscache:index' %}">Move back</a></strong></p>
+    <p><strong><a href="{% url 'rediscache:index' %}">To index page</a></strong></p>
+
+     <div class="creation author">
+        <p style="display: inline-block">Add new author:</p>
+        <form action="{% url 'rediscache:author-create' %}" style="display: inline-block">
+            {% csrf_token %}
+            <input type="submit" value="Create">
+        </form>
+    </div>
 
     <table>
      <tr>

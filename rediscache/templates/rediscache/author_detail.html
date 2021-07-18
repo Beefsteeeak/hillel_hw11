@@ -3,7 +3,8 @@
 {% block title %}Author detail{% endblock %}
 
 {% block content %}
-<p><strong><a href="{% url 'rediscache:author' %}">Move back</a></strong></p>
+
+    <p><strong><a href="{% url 'rediscache:author' %}">To list of authors</a></strong></p>
 
 
     <table>
@@ -20,5 +21,16 @@
         <th>{{ object.book_set.all }}</th>
     </tr>
     </table>
+
+    <div class="author actions">
+        <form action="{% url 'rediscache:author-update' pk=object.pk %}" style="display: inline-block">
+            {% csrf_token %}
+            <input type="submit" value="Update">
+        </form>
+        <form action="{% url 'rediscache:author-delete' pk=object.pk %}" style="display: inline-block">
+            {% csrf_token %}
+            <input type="submit" value="Delete">
+        </form>
+    </div>
 
 {% endblock %}
