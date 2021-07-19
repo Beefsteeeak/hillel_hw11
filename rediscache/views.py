@@ -61,7 +61,6 @@ class BookDetailView(DetailView):
         return Book.objects.prefetch_related('authors').annotate(avg_age=Avg('authors__age'))
 
 
-@method_decorator(cache_page(60), name='dispatch')
 class AuthorCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Author
     fields = ['name', 'age']
@@ -71,7 +70,6 @@ class AuthorCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_message = 'Author was created successfully'
 
 
-@method_decorator(cache_page(20), name='dispatch')
 class AuthorUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Author
     fields = ['name', 'age']
@@ -81,14 +79,12 @@ class AuthorUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = 'Author was updated successfully'
 
 
-@method_decorator(cache_page(20), name='dispatch')
 class AuthorDeleteView(LoginRequiredMixin, DeleteView):
     model = Author
     success_url = reverse_lazy('rediscache:author')
     login_url = '/admin/'
 
 
-@method_decorator(cache_page(60), name='dispatch')
 class BookCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Book
     fields = ['name', 'pages', 'price', 'rating', 'pubdate', 'authors']
@@ -98,7 +94,6 @@ class BookCreateView(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     success_message = 'Book was created successfully'
 
 
-@method_decorator(cache_page(20), name='dispatch')
 class BookUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Book
     fields = ['name', 'pages', 'price', 'rating', 'pubdate', 'authors']
@@ -108,7 +103,6 @@ class BookUpdateView(LoginRequiredMixin, SuccessMessageMixin, UpdateView):
     success_message = 'Book was updated successfully'
 
 
-@method_decorator(cache_page(20), name='dispatch')
 class BookDeleteView(LoginRequiredMixin, DeleteView):
     model = Book
     success_url = reverse_lazy('rediscache:book')
