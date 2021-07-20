@@ -22,11 +22,11 @@
          <th>Authors</th>
     </tr>
     {% for book in object_list %}
-        <tr>
+        <tr bgcolor="{% cycle "#f5f5dc" "#808080" %}">
             <th><a href="{% url 'rediscache:book-detail' pk=book.pk%}">{{ book.name }}</a></th>
             <th>{{ book.rating }}</th>
             <th>{{ book.avg_age }}</th>
-            <th>{{ book.authors.all }}</th>
+            <th>{{ book.authors.all|truncatewords:5 }}</th>
         </tr>
     {% empty %}
         <tr>

@@ -20,7 +20,7 @@
         <th>Number of books</th>
     </tr>
     {% for author in object_list %}
-        <tr>
+        <tr bgcolor="{% cycle "#f5f5dc" "#808080" %}">
             <th><a href="{% url 'rediscache:author-detail' pk=author.pk%}">{{ author.name }}</a></th>
             <th>{{ author.num_books }}</th>
         </tr>

@@ -14,10 +14,10 @@
         <th>Average rating</th>
         <th>Books</th>
     </tr>
-    <tr>
+    <tr bgcolor="#f5f5dc">
         <th>{{ object.name }}</th>
         <th>{{ object.age }}</th>
-        <th>{{ object.avg_rating }}</th>
+        <th>{{ object.avg_rating|floatformat:"2" }}</th>
         <th>{{ object.book_set.all }}</th>
     </tr>
     </table>
