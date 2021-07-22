@@ -23,14 +23,10 @@ def change_forbidden(value):
     for word in forbidden_list:
         value = value.replace(word, "***")
 
-    # correct
-    # for word in forbidden_list:
-    #     if word in value:
-    #         value = value.replace(word, "***")
+    # forbidden_list_lower = [f.lower() for f in forbidden_list]
 
-    # incorrect
-    # for word in value:
-    #     if word in forbidden_list:
+    # for word in value.split():
+    #     if word.lower().strip(",.;:!?@#$%&^*<>") in forbidden_list_lower:
     #         value = value.replace(word, "***")
 
     return value
