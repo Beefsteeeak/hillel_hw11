@@ -1,17 +1,24 @@
 {% extends 'rediscache/base.html' %}
 
+{% load random_record %}
+{% load change_forbidden %}
+
 {% block title %}List of books{% endblock %}
 
 {% block content %}
 
-    <p><strong><a href="{% url 'rediscache:index' %}">To index page</a></strong></p>
+    <p><strong><a href="{% url 'rediscache:index' %}">{% filter change_forbidden %}To index page{% endfilter %}</a></strong></p>
 
     <div class="creation book">
-        <p style="display: inline-block">Add new book:</p>
+        <p style="display: inline-block">{% filter change_forbidden %}Add new book:{% endfilter %}</p>
         <form action="{% url 'rediscache:book-create' %}" style="display: inline-block">
             {% csrf_token %}
             <input type="submit" value="Create">
         </form>
+    </div>
+
+    <div>
+    <p>{% filter change_forbidden %}Random book:{% endfilter %} {% random_record %}</p>
     </div>
 
     <table>
@@ -26,7 +33,7 @@
             <th><a href="{% url 'rediscache:book-detail' pk=book.pk%}">{{ book.name }}</a></th>
             <th>{{ book.rating }}</th>
             <th>{{ book.avg_age }}</th>
-            <th>{{ book.authors.all|truncatewords:5 }}</th>
+            <th>{{ book.authors.all|truncatewords:5|change_forbidden }}</th>
         </tr>
     {% empty %}
         <tr>
